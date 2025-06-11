@@ -13,44 +13,51 @@ namespace Reporters
 
         public static void NameInfo(string name)
         {
-            MySqlConnection connect = new MySqlConnection(connectionString);
-
-            connect.Open();
-
-            try
+            if (ValidateUser.Password())
             {
-                string query = "SELECT longreports, shorttimealerts + manyalerts as alerts FROM personalreports " +
-                    "JOIN personalinfo ON personalreports.personid = personalinfo.id WHERE personalinfo.name = @name " +
-                    "OR personalinfo.codename = @name; ";
-                MySqlCommand cmd = new MySqlCommand(query, connect);
-                cmd.Parameters.AddWithValue("@name", name);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                reader.Read();
-                int reports = reader.GetInt32("longreports");
-                int alerts = reader.GetInt32("alerts");
-                reader.Close();
-                connect.Close();
+                MySqlConnection connect = new MySqlConnection(connectionString);
 
-                if (reports > 0 && alerts > 0)
+                connect.Open();
+
+                try
                 {
-                    Console.WriteLine("This guy is some sort of double agent!!");
+                    string query = "SELECT longreports, shorttimealerts + manyalerts as alerts FROM personalreports " +
+                        "JOIN personalinfo ON personalreports.personid = personalinfo.id WHERE personalinfo.name = @name " +
+                        "OR personalinfo.codename = @name; ";
+                    MySqlCommand cmd = new MySqlCommand(query, connect);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    reader.Read();
+                    int reports = reader.GetInt32("longreports");
+                    int alerts = reader.GetInt32("alerts");
+                    reader.Close();
+                    connect.Close();
+
+                    if (reports > 0 && alerts > 0)
+                    {
+                        Console.WriteLine("This guy is some sort of double agent!!");
+                    }
+                    else if (reports > 0)
+                    {
+                        Console.WriteLine("This guy is a good potential candidate to hire.");
+                    }
+                    else if (alerts > 0)
+                    {
+                        Console.WriteLine("This guy is dangerous, be careful with him.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not enough information about this guy.");
+                    }
                 }
-                else if (reports > 0)
+                catch (Exception)
                 {
-                    Console.WriteLine("This guy is a good potential candidate to hire.");
-                }
-                else if (alerts > 0)
-                {
-                    Console.WriteLine("This guy is dangerous, be careful with him.");
-                }
-                else
-                {
-                    Console.WriteLine("Not enough information about this guy.");
+                    Console.WriteLine("This guy doesn't exist in the database.");
                 }
             }
-            catch (Exception)
+            else
             {
-                Console.WriteLine("This guy doesn't exist in the database.");
+                Console.WriteLine("You do not have permission to see this data");
             }
 
 

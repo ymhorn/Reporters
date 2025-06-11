@@ -13,27 +13,34 @@ namespace Reporters
 
         public static void AllAlerts()
         {
-            MySqlConnection connect = new MySqlConnection(connectionString);
-
-            connect.Open();
-
-            Dictionary<string,int> alerts = new Dictionary<string,int>();
-
-            string query = "SELECT name, shorttimealerts + manyalerts AS alerts FROM personalinfo " +
-                "JOIN personalreports ON personalinfo.id = personalreports.personid WHERE shorttimealerts + manyalerts > 0;";
-            MySqlCommand cmd = new MySqlCommand(query, connect);
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            if (ValidateUser.Password())
             {
-                alerts.Add(reader.GetString("name"), reader.GetInt32("alerts"));
+                MySqlConnection connect = new MySqlConnection(connectionString);
+
+                connect.Open();
+
+                Dictionary<string, int> alerts = new Dictionary<string, int>();
+
+                string query = "SELECT name, shorttimealerts + manyalerts AS alerts FROM personalinfo " +
+                    "JOIN personalreports ON personalinfo.id = personalreports.personid WHERE shorttimealerts + manyalerts > 0;";
+                MySqlCommand cmd = new MySqlCommand(query, connect);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    alerts.Add(reader.GetString("name"), reader.GetInt32("alerts"));
+                }
+                reader.Close();
+                connect.Close();
+
+                foreach (var alert in alerts)
+                {
+                    Console.WriteLine($"{alert.Value} alerts about {alert.Key}");
+                }
             }
-            reader.Close();
-            connect.Close();
-
-            foreach (var alert in alerts)
+            else
             {
-                Console.WriteLine($"{alert.Value} alerts about {alert.Key}");
+                Console.WriteLine("You do not have permission to see this data");
             }
         }
 

@@ -13,39 +13,53 @@ namespace Reporters
         
         public static void Name(string codeName)
         {
-            MySqlConnection connect = new MySqlConnection(connectionString);
+            if (ValidateUser.Password())
+            {
+                MySqlConnection connect = new MySqlConnection(connectionString);
 
-            connect.Open();
-            try
-            {
-                string query = "SELECT name FROM personalinfo WHERE codename = @codename;";
-                MySqlCommand cmd = new MySqlCommand(query, connect);
-                cmd.Parameters.AddWithValue("@codename", codeName);
-                string name = Convert.ToString(cmd.ExecuteScalar());
-                Console.WriteLine(name);
+                connect.Open();
+                try
+                {
+                    string query = "SELECT name FROM personalinfo WHERE codename = @codename;";
+                    MySqlCommand cmd = new MySqlCommand(query, connect);
+                    cmd.Parameters.AddWithValue("@codename", codeName);
+                    string name = Convert.ToString(cmd.ExecuteScalar());
+                    Console.WriteLine(name);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("No such code name found.");
+                }
             }
-            catch (Exception)
+            else
             {
-                Console.WriteLine("No such code name found.");
+                Console.WriteLine("You do not have permission to see this data");
             }
         }
 
         public static void Name(int id)
         {
-            MySqlConnection connect = new MySqlConnection(connectionString);
+            if (ValidateUser.Password())
+            {
+                MySqlConnection connect = new MySqlConnection(connectionString);
 
-            connect.Open();
-            try
-            {
-                string query = "SELECT name FROM personalinfo WHERE id = @id;";
-                MySqlCommand cmd = new MySqlCommand(query, connect);
-                cmd.Parameters.AddWithValue("@id", id);
-                string name = Convert.ToString(cmd.ExecuteScalar());
-                Console.WriteLine(name);
+                connect.Open();
+                try
+                {
+                    string query = "SELECT name FROM personalinfo WHERE id = @id;";
+                    MySqlCommand cmd = new MySqlCommand(query, connect);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    string name = Convert.ToString(cmd.ExecuteScalar());
+                    Console.WriteLine(name);
+                }
+                catch
+                {
+                    Console.WriteLine("No such id found");
+                }
             }
-            catch
-            {
-                Console.WriteLine("No such id found");
+            else
+            { 
+                Console.WriteLine("You do not have permission to see this data"); 
             }
 
         }
