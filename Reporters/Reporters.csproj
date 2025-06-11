@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="Alerts.cs" />
     <Compile Include="CSVrecieve.cs" />
+    <Compile Include="FindName.cs" />
     <Compile Include="InputReport.cs" />
     <Compile Include="PotentialCandidates.cs" />
     <Compile Include="Program.cs" />

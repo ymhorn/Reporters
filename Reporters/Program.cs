@@ -13,7 +13,8 @@ namespace Reporters
             //ReportToDB.AddReport(InputReport.Input());
             //PotentialCandidates.ListCandidates();
             //Alerts.AllAlerts();
-            SearchByName.NameInfo("gtr");
+            //SearchByName.NameInfo("gtr");
+            //FindName.Name("gtr");
         }
     }
 }
