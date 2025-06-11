@@ -11,7 +11,8 @@ namespace Reporters
         static void Main(string[] args)
         {
             //ReportToDB.AddReport(InputReport.Input());
-            PotentialCandidates.ListCandidates();
+            //PotentialCandidates.ListCandidates();
+            Alerts.AllAlerts();
         }
     }
 }
