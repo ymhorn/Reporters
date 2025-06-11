@@ -113,12 +113,14 @@
     <Compile Include="CSVrecieve.cs" />
     <Compile Include="FindName.cs" />
     <Compile Include="InputReport.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="PotentialCandidates.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report.cs" />
     <Compile Include="ReportToDB.cs" />
     <Compile Include="SearchByName.cs" />
+    <Compile Include="ValidateUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

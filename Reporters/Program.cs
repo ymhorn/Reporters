@@ -10,11 +10,7 @@ namespace Reporters
     {
         static void Main(string[] args)
         {
-            //ReportToDB.AddReport(InputReport.Input());
-            //PotentialCandidates.ListCandidates();
-            //Alerts.AllAlerts();
-            //SearchByName.NameInfo("gtr");
-            //FindName.Name("gtr");
+            Menu.RunMenu();
         }
     }
 }
