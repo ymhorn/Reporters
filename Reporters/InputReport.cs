@@ -9,14 +9,14 @@ namespace Reporters
 {
     internal static class InputReport
     {
-        public static Report input()
+        public static Report Input()
         {
             Report report = new Report();
-            Console.WriteLine("");
+            Console.WriteLine("Enter your name/code name:");
             report.ReporterName = Console.ReadLine();
-            Console.WriteLine("");
+            Console.WriteLine("Who are you reporting about:");
             report.ReportedName = Console.ReadLine();
-            Console.WriteLine("");
+            Console.WriteLine("What is the report:");
             report.ReportText = Console.ReadLine();
             report.DateTime = DateTime.Now;
 

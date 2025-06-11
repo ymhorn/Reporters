@@ -10,6 +10,7 @@ namespace Reporters
     {
         static void Main(string[] args)
         {
+            //ReportToDB.AddReport(InputReport.Input());
         }
     }
 }
