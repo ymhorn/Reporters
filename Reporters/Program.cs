@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Reporters
 {
+    //The program runner
     internal class Program
     {
+        //Runs the program
         static void Main(string[] args)
         {
             Menu.RunMenu();

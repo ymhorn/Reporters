@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Reporters
 {
+    //A way to input a report through the console
     internal static class InputReport
     {
+        //Recieves all data from the user and creates a report object
         public static Report Input()
         {
             Report report = new Report();

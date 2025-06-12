@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Reporters
 {
+    //A menu to display all options to user and calls the relevant function
     internal static class Menu
     {
+        //Runs the menu
         public static void RunMenu()
         {
             bool exit = false;
             while (!exit)
             {
+                //Display all options to the user
                 Console.WriteLine("\nWhat would you like to do today:\n" +
                     "1. Add a report to the system.\n" +
                     "2. Add a CSV file with reports to the system.\n" +
@@ -22,8 +25,10 @@ namespace Reporters
                     "6. Find out the real name of a person.\n" +
                     "7. Exit\n");
 
+                //Recieve option
                 string option = Console.ReadLine();
 
+                //Runs the program based on the user input
                 switch (option)
                 {
                     case "1":

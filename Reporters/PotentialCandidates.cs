@@ -7,21 +7,26 @@ using MySql.Data.MySqlClient;
 
 namespace Reporters
 {
+    //A way to recieve a list of candidates that would be good reporters
     internal static class PotentialCandidates
     {
-        
+        //URL to DataBase
         static private string connectionString = "server = localhost; user = root; database = reportdb; port = 3306;";
 
+        //Output all potential candidates
         public static void ListCandidates()
         {
+            //Checks permissions
             if (ValidateUser.Password())
             {
+                List<string> candidates = new List<string>();
+
+                //Connect to URL
                 MySqlConnection connect = new MySqlConnection(connectionString);
 
                 connect.Open();
 
-                List<string> candidates = new List<string>();
-
+                //SQL query to return all candidates that fit the criteria
                 string query = "SELECT name FROM personalinfo JOIN personalreports ON " +
                     "personalinfo.id = personalreports.personid WHERE personalreports.longreports > 10;";
                 MySqlCommand command = new MySqlCommand(query, connect);
@@ -35,11 +40,13 @@ namespace Reporters
                 reader.Close();
                 connect.Close();
 
+                //Outputs all the names
                 foreach (string candidate in candidates)
                 {
                     Console.WriteLine(candidate);
                 }
             }
+            //Output when user doesn't have permission
             else
             {
                 Console.WriteLine("You do not have permission to see this data");
